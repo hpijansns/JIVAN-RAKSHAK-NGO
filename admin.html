@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>एडमिन पैनल | जीवन रक्षक ट्रस्ट</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #1a237e; /* Deep Navy Blue */
+            --accent-color: #ffb300;  /* Golden Yellow */
+            --bg-color: #f4f5f9; /* Light Background */
+            --text-dark: #263238;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .admin-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .admin-header h1 { margin: 0; font-size: 24px; font-weight: 700; }
+        .logout-btn { background: var(--accent-color); color: var(--text-dark); border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 500; transition: background 0.3s; }
+
+        .dashboard-container { max-width: 1400px; margin: 40px auto; padding: 0 20px; }
+        
+        /* Action Bar */
+        .action-bar { display: flex; justify-content: flex-end; margin-bottom: 25px; }
+        .add-case-btn { background: var(--primary-color); color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background 0.3s; }
+
+        /* Case Table */
+        .case-table-wrapper { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 14px; }
+        th { background-color: var(--secondary-bg); color: var(--primary-color); font-weight: 700; text-transform: uppercase; }
+        
+        .action-btns button { background: #4caf50; color: white; border: none; padding: 5px 10px; margin-right: 5px; border-radius: 4px; cursor: pointer; transition: opacity 0.3s; }
+        .action-btns button.edit { background: #2196f3; }
+        .action-btns button.delete { background: #f44336; }
+        
+        /* Form Modal Styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); padding-top: 60px; }
+        .modal-content { background-color: #fff; margin: 5% auto; padding: 30px; border-radius: 10px; width: 90%; max-width: 600px; position: relative; }
+        .close-modal { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .modal-content h3 { color: var(--primary-color); margin-top: 0; border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; }
+        
+        .form-group label { display: block; margin-top: 15px; margin-bottom: 5px; font-weight: 500; }
+        .form-group input, .form-group textarea { width: 98%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .form-group button { background: var(--accent-color); color: var(--text-dark); padding: 10px 20px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; font-weight: 700; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-header">
+        <h1><i class="fas fa-user-shield"></i> Jeevan Rakshak Admin Dashboard</h1>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <div class="dashboard-container">
+        
+        <div class="action-bar">
+            <button class="add-case-btn" onclick="openModal()"><i class="fas fa-plus-circle"></i> नया केस जोड़ें</button>
+        </div>
+
+        <h2><i class="fas fa-list-alt"></i> सक्रिय मरीज़ केस</h2>
+        
+        <div class="case-table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>नाम</th>
+                        <th>लक्ष्य (Goal)</th>
+                        <th>जुटाई गई (Raised)</th>
+                        <th>प्रतिशत (%)</th>
+                        <th>दिन शेष</th>
+                        <th>QR कोड लिंक</th>
+                        <th>एक्शन</th>
+                    </tr>
+                </thead>
+                <tbody id="caseTableBody">
+                    <tr>
+                        <td>R001</td>
+                        <td>राहुल, 7 वर्ष</td>
+                        <td>₹8,50,000</td>
+                        <td>₹5,52,500</td>
+                        <td>65%</td>
+                        <td>15</td>
+                        <td><a href="YOUR_QR_CODE_LINK_FOR_R001" target="_blank">View QR</a></td>
+                        <td class="action-btns">
+                            <button class="edit"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="delete"><i class="fas fa-trash-alt"></i> Delete</button>
+                        </td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+    <div id="caseModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>नया/केस एडिट करें</h3>
+            <form id="caseForm">
+                <div class="form-group">
+                    <label for="caseId">केस ID</label>
+                    <input type="text" id="caseId" required>
+                </div>
+                <div class="form-group">
+                    <label for="patientName">मरीज़ का नाम और उम्र</label>
+                    <input type="text" id="patientName" required>
+                </div>
+                <div class="form-group">
+                    <label for="goalAmount">लक्ष्य राशि (उदा. 850000)</label>
+                    <input type="number" id="goalAmount" required>
+                </div>
+                <div class="form-group">
+                    <label for="raisedAmount">जुटाई गई राशि (उदा. 552500)</label>
+                    <input type="number" id="raisedAmount" required>
+                </div>
+                <div class="form-group">
+                    <label for="daysLeft">दिन शेष</label>
+                    <input type="number" id="daysLeft" required>
+                </div>
+                <div class="form-group">
+                    <label for="qrLink">QR कोड इमेज लिंक (URL)</label>
+                    <input type="url" id="qrLink" required>
+                </div>
+                <div class="form-group">
+                    <label for="storySnippet">छोटी कहानी (Snippet)</label>
+                    <textarea id="storySnippet" rows="3" required></textarea>
+                </div>
+                <button type="submit">सेव करें</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal JS
+        function openModal() {
+            document.getElementById('caseModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('caseModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('caseModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        document.getElementById('caseForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // **Important Note:** This is where you would send data to your actual backend server (e.g., PHP, Node.js)
+            // to update the database and subsequently update the frontend (index.html).
+            alert('फॉर्म सबमिट हो गया! (रियल एप्लीकेशन में, यह डेटा डेटाबेस में जाएगा।)');
+            closeModal();
+        });
+    </script>
+</body>
+</html>
