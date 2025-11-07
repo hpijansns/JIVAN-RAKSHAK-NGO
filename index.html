@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeevan Rakshak Trust | जीवन रक्षक ट्रस्ट - एक आशा</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #1a237e; /* Deep Navy Blue for Trust */
+            --accent-color: #ffb300;  /* Golden Yellow for Hope and Action */
+            --secondary-bg: #e8eaf6; /* Light Lavender/Blue for Clean BG */
+            --text-dark: #263238;
+            --text-light: #fff;
+            --font-serif: 'Merriweather', serif;
+            --font-sans: 'Roboto', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-sans);
+            background: var(--secondary-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Utility & Headings */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .text-center { text-align: center; }
+
+        .btn {
+            background: var(--accent-color);
+            padding: 14px 35px;
+            border-radius: 50px;
+            color: var(--text-dark);
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 25px;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background: #ffa000; 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        /* HEADER / NAVIGATION / HERO */
+        header { background: var(--primary-color); padding: 18px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-serif); font-size: 30px; color: var(--text-light); text-decoration: none; }
+        .nav-links a { color: var(--text-light); text-decoration: none; margin-left: 35px; font-weight: 500; transition: color 0.3s; opacity: 0.9; }
+        .nav-links a:hover { color: var(--accent-color); opacity: 1; }
+        .nav-donate-btn { background: var(--accent-color); color: var(--text-dark); padding: 10px 25px; border-radius: 40px; font-weight: 700; margin-top: 0; box-shadow: none; }
+        
+        .hero { height: 95vh; background: url('banner.jpg') center center/cover no-repeat fixed; display: flex; align-items: center; position: relative; }
+        .hero::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 35, 126, 0.7); }
+        .hero-content { position: relative; color: var(--text-light); max-width: 800px; text-align: left; padding: 20px; z-index: 10; }
+        .hero h1 { font-family: var(--font-serif); font-size: 64px; }
+        
+        /* TRUST & SEALS */
+        #trust-seals { padding: 30px 0; background: var(--text-light); text-align: center; border-bottom: 2px solid #eee; }
+        .seals-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .seal-item { display: flex; align-items: center; font-size: 16px; font-weight: 500; color: var(--primary-color); }
+        .seal-item i { font-size: 24px; color: var(--accent-color); margin-right: 10px; }
+        
+        /* PATIENT CARDS */
+        section { padding: 100px 0; }
+        #patients { background: var(--text-light); }
+        .patients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 50px; }
+        .patient-card { background: var(--text-light); border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; transition: all 0.3s ease-in-out; border: 1px solid #e0e0e0; }
+        .patient-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .patient-image { width: 100%; height: 280px; object-fit: cover; filter: grayscale(10%); }
+        
+        .card-content { padding: 25px; text-align: left; }
+        .card-content h3 { font-size: 26px; margin-top: 0; color: var(--primary-color); font-family: var(--font-serif); }
+        .card-content .story-snippet { font-size: 16px; margin-bottom: 20px; font-style: italic; color: #666; border-left: 4px solid var(--accent-color); padding-left: 15px; }
+        
+        .donation-stats { display: flex; justify-content: space-between; font-size: 14px; font-weight: 500; margin-bottom: 20px; }
+        .stats-box strong { display: block; font-size: 20px; font-weight: 700; color: var(--primary-color); }
+        .stats-box small { color: #777; font-weight: 500; font-size: 12px; }
+        
+        .progress-bar-container { background: #eee; border-radius: 10px; height: 18px; margin: 15px 0 10px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
+        .progress-bar { height: 100%; background: linear-gradient(to right, #4db6ac, var(--accent-color)); border-radius: 10px; transition: width 1s ease-out; }
+        .card-content .btn { width: 100%; font-size: 16px; margin-top: 20px; }
+
+        /* QR CODE MODAL STYLES (Dynamic & Enhanced) */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); animation: fadeIn 0.3s ease-out; }
+        .modal-content { background-color: var(--text-light); margin: 10% auto; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5); text-align: center; position: relative; border-top: 5px solid var(--accent-color); }
+        .close-btn { color: var(--primary-color); float: right; font-size: 30px; font-weight: bold; position: absolute; top: 10px; right: 20px; }
+        .qr-area h3 { color: var(--primary-color); font-family: var(--font-serif); margin-bottom: 5px; font-size: 26px; }
+        #qrCodeImage { width: 250px; height: 250px; margin: 20px auto; border: 5px solid var(--secondary-bg); display: block; border-radius: 8px; object-fit: contain; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+        .modal-footer { margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 14px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">🙏 Jeevan Rakshak</a>
+                <div class="nav-links">
+                    <a href="#trust-seals">विश्वास</a>
+                    <a href="#patients">कहानी</a>
+                    <a href="#donor-wall">डोनर वॉल</a>
+                    <a href="#contact">संपर्क</a>
+                </div>
+                <button class="btn nav-donate-btn open-modal-btn" 
+                        data-qr-link="YOUR_DEFAULT_QR_CODE_LINK" 
+                        data-case-id="General Fund">
+                    जीवन दान दें
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="container hero-content">
+            <span>हर धड़कन मायने रखती है...</span>
+            <h1>आपके हाथों में एक मासूम ज़िंदगी की डोर है।</h1>
+            <p style="font-size: 22px; opacity: 0.9; margin-bottom: 40px;">हम केवल धन नहीं जुटा रहे हैं; हम टूटे हुए परिवारों को आशा, समय और दूसरा मौका दे रहे हैं।</p>
+            <button class="btn open-modal-btn" 
+                    data-qr-link="YOUR_DEFAULT_QR_CODE_LINK" 
+                    data-case-id="General Fund">
+                किसी की आशा बनें
+            </button>
+        </div>
+    </div>
+
+    <section id="trust-seals">
+        <div class="container">
+            <div class="seals-container">
+                <div class="seal-item"><i class="fas fa-certificate"></i> NGO Darpan Certified</div>
+                <div class="seal-item"><i class="fas fa-lock"></i> 100% Secure Payments</div>
+                <div class="seal-item"><i class="fas fa-file-invoice-dollar"></i> 80G Tax Exemption</div>
+                <div class="seal-item"><i class="fas fa-shield-alt"></i> Verified Cases Only</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="patients" class="text-center">
+        <div class="container">
+            <h2>🌟 जिन कहानियों को आपने संवारा है</h2>
+            <p style="margin-bottom: 40px;">इन परिवारों के संघर्ष को देखें। उनका भविष्य आपके एक दयालु कदम पर निर्भर करता है।</p>
+
+            <div class="patients-grid">
+                
+                <div class="patient-card">
+                    <img class="patient-image" src="patient1.jpg" alt="Rahul, Blood Cancer"> 
+                    <div class="card-content">
+                        <h3>राहुल, 7 वर्ष <span style="color:#00796b; font-size:16px;">(R001)</span></h3> 
+                        <p class="story-snippet">"माँ कहती है, अगर मैं ठीक हो गया, तो अंतरिक्ष यात्री बनूँगा। पर इलाज... बहुत दर्द होता है।"</p>
+                        
+                        <div class="donation-stats">
+                            <div class="stats-box"><strong>₹5,52,500</strong> <small>जुटाई गई राशि</small></div>
+                            <div class="stats-box"><strong>₹8,50,000</strong> <small>कुल लक्ष्य</small></div>
+                            <div class="stats-box"><strong>15 दिन</strong> <small>शेष</small></div>
+                        </div>
+                        
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 65%;"></div>
+                        </div>
+
+                        <button class="btn open-modal-btn" 
+                                data-qr-link="YOUR_QR_CODE_LINK_FOR_R001" 
+                                data-case-id="R001 (Rahul)">
+                            राहुल को नया जीवन दें
+                        </button>
+                        <a href="#" style="display: block; margin-top: 15px; font-weight: 500; color: var(--primary-color);">पूरी कहानी और रिपोर्ट देखें <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="patient-card">
+                    <img class="patient-image" src="patient2.jpg" alt="Meera, Heart Surgery"> 
+                    <div class="card-content">
+                        <h3>मीरा देवी, 65 वर्ष <span style="color:#00796b; font-size:16px;">(M002)</span></h3> 
+                        <p class="story-snippet">"मैं अपने पोते-पोतियों की शादी देखना चाहती हूँ, बस एक और मौका मिल जाए।"</p>
+                        
+                        <div class="donation-stats">
+                            <div class="stats-box"><strong>₹3,12,500</strong> <small>जुटाई गई राशि</small></div>
+                            <div class="stats-box"><strong>₹6,25,000</strong> <small>कुल लक्ष्य</small></div>
+                            <div class="stats-box"><strong>20 दिन</strong> <small>शेष</small></div>
+                        </div>
+
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 50%;"></div>
+                        </div>
+                        
+                        <button class="btn open-modal-btn" 
+                                data-qr-link="YOUR_QR_CODE_LINK_FOR_M002" 
+                                data-case-id="M002 (Meera)">
+                            मीरा की धड़कन बनें
+                        </button>
+                        <a href="#" style="display: block; margin-top: 15px; font-weight: 500; color: var(--primary-color);">पूरी कहानी और रिपोर्ट देखें <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="patient-card">
+                    <img class="patient-image" src="patient3.jpg" alt="Arjun, Kidney Failure">
+                    <div class="card-content">
+                        <h3>अर्जुन सिंह, 32 वर्ष <span style="color:#00796b; font-size:16px;">(A003)</span></h3> 
+                        <p class="story-snippet">"परिवार का खर्च मुझ पर है। अगर मैं ठीक न हुआ, तो मेरा छोटा भाई कॉलेज नहीं जा पाएगा।"</p>
+                        
+                        <div class="donation-stats">
+                            <div class="stats-box"><strong>₹9,13,750</strong> <small>जुटाई गई राशि</small></div>
+                            <div class="stats-box"><strong>₹10,75,000</strong> <small>कुल लक्ष्य</small></div>
+                            <div class="stats-box"><strong>08 दिन</strong> <small>शेष</small></div>
+                        </div>
+
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 85%;"></div>
+                        </div>
+
+                        <button class="btn open-modal-btn" 
+                                data-qr-link="YOUR_QR_CODE_LINK_FOR_A003" 
+                                data-case-id="A003 (Arjun)">
+                            अर्जुन को सहारा दें
+                        </button>
+                        <a href="#" style="display: block; margin-top: 15px; font-weight: 500; color: var(--primary-color);">पूरी कहानी और रिपोर्ट देखें <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="donor-wall" class="text-center" style="background: var(--primary-color);">...</section>
+    <footer id="contact" style="background: var(--text-dark);">...</footer>
+
+
+    <div id="donationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="qr-area">
+                <h3><i class="fas fa-heart"></i> आपका दान: <span id="modalCaseId"></span> के लिए</h3>
+                <p>QR कोड स्कैन करें और मिनटों में सुरक्षित रूप से दान करें।</p>
+                <img id="qrCodeImage" src="" alt="UPI Donation QR Code">
+                
+                <div class="modal-footer">
+                    <p><i class="fas fa-lock"></i> 100% सुरक्षित और पारदर्शी लेनदेन।</p>
+                    <p>UPI ID: <span style="font-weight: 700; color: var(--primary-color);">jeevanrakshak@bankname</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Dynamic Modal Functionality
+        var modal = document.getElementById("donationModal");
+        var btns = document.getElementsByClassName("open-modal-btn");
+        var span = document.getElementsByClassName("close-btn")[0];
+        var qrImage = document.getElementById("qrCodeImage");
+        var modalCaseId = document.getElementById("modalCaseId");
+
+        function openModal(qrLink, caseId) {
+            qrImage.src = qrLink;
+            modalCaseId.textContent = caseId;
+            modal.style.display = "block";
+        }
+
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener('click', function(event) {
+                event.preventDefault(); 
+                var qrLink = this.getAttribute('data-qr-link');
+                var caseId = this.getAttribute('data-case-id');
+                openModal(qrLink, caseId);
+            });
+        }
+
+        span.onclick = function() { modal.style.display = "none"; }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
